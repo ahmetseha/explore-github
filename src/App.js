@@ -1,34 +1,29 @@
-import styled from "styled-components";
+import { FormattedMessage, IntlProvider } from "react-intl";
+import { useState } from "react";
 
-import "./App.css";
+import { Provider as LanguageProvider } from "./context/language";
+import localization from "./localization";
 
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-`;
+const App = () => {
+  const defaultLang = navigator.language;
+  const [locale, setLocale] = useState(defaultLang);
 
-const Wrapper = styled.section`
-  padding: 4em;
-  background: papayawhip;
-  width: 300px;
-`;
-
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: palevioletred;
-`;
-
-function App() {
   return (
-    <Container>
-      <Wrapper>
-        <Title>Hello World!</Title>
-      </Wrapper>
-    </Container>
+    <IntlProvider
+      messages={localization[locale]}
+      locale={locale}
+      defaultLocale={defaultLang}>
+      <LanguageProvider locale={locale} setLocale={setLocale}>
+        <div>
+          <div>
+            <FormattedMessage id="title" />
+          </div>
+          <button onClick={() => setLocale("tr-TR")}>TR</button>
+          <button onClick={() => setLocale("en-US")}>EN</button>
+        </div>
+      </LanguageProvider>
+    </IntlProvider>
   );
-}
+};
 
 export default App;
