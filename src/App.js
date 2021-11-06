@@ -1,11 +1,16 @@
 import "./App.css";
 
-import { FormattedMessage, IntlProvider } from "react-intl";
+import { IntlProvider } from "react-intl";
 import { useState } from "react";
+import { Switch, Route, HashRouter as Router } from "react-router-dom";
 
 import { Provider as LanguageProvider } from "./context/language";
 import localization from "./localization";
 import Header from "./components/Header";
+import Home from "./pages/Home";
+import Explore from "./pages/Explore";
+import Trends from "./pages/Trends";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
   const defaultLang = navigator.language;
@@ -17,14 +22,23 @@ const App = () => {
       locale={locale}
       defaultLocale={defaultLang}>
       <LanguageProvider locale={locale} setLocale={setLocale}>
-        <Header />
-        {/* <div>
-          <div>
-            <FormattedMessage id="title" />
-          </div>
-          <button onClick={() => setLocale("tr-TR")}>TR</button>
-          <button onClick={() => setLocale("en-US")}>EN</button>
-        </div> */}
+        <Router>
+          <Header />
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/explore">
+              <Explore />
+            </Route>
+            <Route path="/trends">
+              <Trends />
+            </Route>
+            <Route path="*" exact>
+              <NotFoundPage />
+            </Route>
+          </Switch>
+        </Router>
       </LanguageProvider>
     </IntlProvider>
   );

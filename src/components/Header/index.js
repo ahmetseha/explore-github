@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 import styled from "styled-components";
 
 const Container = styled.header`
@@ -26,36 +28,38 @@ const List = styled.li`
   color: #f2b138;
   cursor: pointer;
 `;
-const Lang = styled.select`
+const Lang = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  background: transparent;
-  border: none;
-  padding: 12px 12px 10px 0;
+  grid-gap: 15px;
   font-size: 15px;
   color: #f2b138;
   cursor: pointer;
-  &:focus {
-    outline: none;
-  }
-  option {
-    background: #353d40;
-  }
+`;
+const LangList = styled.li`
+  background: #353d40;
 `;
 
 const Header = () => {
   return (
     <Container>
-      <Head>Github Repositories</Head>
+      <NavLink to="/">
+        <Head>Github Repositories</Head>
+      </NavLink>
       <Nav>
-        <List>Home</List>
-        <List>Explore</List>
-        <List>Trend</List>
+        <NavLink to="/">
+          <List>Home</List>
+        </NavLink>
+        <NavLink to="/Explore">
+          <List>Explore</List>
+        </NavLink>
+        <NavLink to="/Trends">
+          <List>Trends</List>
+        </NavLink>
         <Lang>
-          <option>TR</option>
-          <option>EN</option>
+          <LangList>TR</LangList>
+          <LangList>EN</LangList>
         </Lang>
       </Nav>
     </Container>

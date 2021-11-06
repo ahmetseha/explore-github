@@ -2,7 +2,7 @@ import * as React from "react";
 
 const Language = React.createContext();
 
-function Provider({ children, locale, setLocale }) {
+const Provider = ({ children, locale, setLocale }) => {
   return (
     <Language.Provider
       value={{
@@ -12,6 +12,6 @@ function Provider({ children, locale, setLocale }) {
       {children}
     </Language.Provider>
   );
-}
+};
 
 export { Provider, Language };
