@@ -1,7 +1,8 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
 const Trends = () => {
-  return <div>trends</div>;
+  return <FormattedMessage id="trends">trends</FormattedMessage>;
 };
 
 export default Trends;
