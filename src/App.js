@@ -23,7 +23,7 @@ const App = () => {
       defaultLocale={defaultLang}>
       <LanguageProvider locale={locale} setLocale={setLocale}>
         <Router>
-          <Header />
+          <Header locale={locale} setLocale={setLocale} />
           <Switch>
             <Route exact path="/">
               <Home />

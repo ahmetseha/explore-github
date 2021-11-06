@@ -28,20 +28,28 @@ const List = styled.li`
   color: #f2b138;
   cursor: pointer;
 `;
-const Lang = styled.ul`
+const Lang = styled.select`
   display: flex;
   justify-content: center;
   align-items: center;
-  grid-gap: 15px;
+  flex-direction: column;
   font-size: 15px;
   color: #f2b138;
+  border: none;
+  background: transparent;
   cursor: pointer;
-`;
-const LangList = styled.li`
-  background: #353d40;
+  &:focus {
+    outline: none;
+  }
+  option {
+    background: #353d40;
+  }
 `;
 
-const Header = () => {
+const Header = (props) => {
+  const onLocaleChange = (locale) => {
+    props.setLocale(locale);
+  };
   return (
     <Container>
       <NavLink to="/">
@@ -57,9 +65,11 @@ const Header = () => {
         <NavLink to="/Trends">
           <List>Trends</List>
         </NavLink>
-        <Lang>
-          <LangList>TR</LangList>
-          <LangList>EN</LangList>
+        <Lang
+          value={props.locale}
+          onChange={(e) => onLocaleChange(e.target.value)}>
+          <option value="tr-TR">TR</option>
+          <option value="en-US">EN</option>
         </Lang>
       </Nav>
     </Container>
