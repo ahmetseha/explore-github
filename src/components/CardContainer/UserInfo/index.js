@@ -1,37 +1,39 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
-
-import getUsers from "../../../api";
 
 const UserContainer = styled.div`
   display: flex;
   justify-content: center;
+  flex-direction: column;
+`;
+const Image = styled.div`
+  display: flex;
+  justify-content: center;
   align-items: center;
+  img {
+    width: 150px;
+    height: 150px;
+    border-radius: 150px;
+  }
+`;
+const Bio = styled.p`
+  font-size: 12px;
+`;
+const FollowInfo = styled.span`
+  font-size: 12px;
 `;
 
 const UserInfo = (props) => {
-  const { name, setName, getUser } = props;
-  const [userInfo, setUserInfo] = useState([]);
-
-  //   const getUserInfo = () => {
-  //     getUsers.get(`${name}`).then((res) => {
-  //       setUserInfo(res.data);
-  //       console.log(userInfo);
-  //     });
-  //   };
-
-  useEffect(() => {
-    getUsers.get(`${name}`).then((res) => {
-      setUserInfo(res.data);
-      console.log(userInfo);
-    });
-  });
+  const { userInfo } = props;
 
   return (
     <UserContainer>
-      <div>
-        <img src={userInfo.avatar_url} alt="" />
-      </div>
+      <Image>
+        <img src={userInfo.avatar_url} alt={userInfo.name} />
+      </Image>
+      <Bio>{userInfo.bio}</Bio>
+      <FollowInfo>
+        Followers : {userInfo.followers} <br /> Following : {userInfo.following}
+      </FollowInfo>
     </UserContainer>
   );
 };

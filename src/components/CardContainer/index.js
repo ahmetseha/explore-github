@@ -7,17 +7,24 @@ import getUsers from "../../api";
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
-  margin: 30px;
-  grid-gap: 30px;
+`;
+const UserInfoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d9d9d9;
+  width: 40%;
+`;
+const CardAndInput = styled.div`
+  width: 100%;
+  padding: 20px;
+  overflow: hidden;
 `;
 const FormSection = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   margin: 30px;
-
   input {
     border: 1px solid #353d40;
     border-radius: 8px;
@@ -38,41 +45,58 @@ const CardContent = styled.div`
   justify-content: space-evenly;
   flex-wrap: wrap;
   grid-gap: 40px;
+  height: 100vh;
 `;
 
 const CardContainer = () => {
   const [name, setName] = useState("");
   const [repos, setRepos] = useState([]);
+  const [userInfo, setUserInfo] = useState([]);
+  const [showUserInfo, setShowUserInfo] = useState(false);
+
+  const getUserInfo = () => {
+    getUsers.get(`${name}`).then((res) => {
+      setUserInfo(res.data);
+      console.log(userInfo);
+    });
+  };
 
   const getUserRepo = (e) => {
     e.preventDefault();
     getUsers.get(`${name}/repos?per_page=1000`).then((res) => {
-      // console.log(res.data);
       setRepos(res.data);
     });
+    getUserInfo();
+    setShowUserInfo(true);
   };
 
   return (
     <Container>
-      <FormSection onSubmit={getUserRepo}>
-        <input value={name} onChange={(e) => setName(e.target.value)} />
-      </FormSection>
-      <UserInfo name={name} setName={setName} getUser={getUserRepo} />
-      <CardContent>
-        {repos
-          ? repos.map((repo, id) => {
-              return (
-                <Card
-                  key={id}
-                  repoId={repo.id}
-                  repoName={repo.name}
-                  ahref={repo.html_url}
-                  repoLang={repo.language}
-                />
-              );
-            })
-          : null}
-      </CardContent>
+      {showUserInfo && (
+        <UserInfoContainer>
+          <UserInfo userInfo={userInfo} />
+        </UserInfoContainer>
+      )}
+      <CardAndInput>
+        <FormSection onSubmit={getUserRepo}>
+          <input value={name} onChange={(e) => setName(e.target.value)} />
+        </FormSection>
+        <CardContent>
+          {repos
+            ? repos.map((repo, id) => {
+                return (
+                  <Card
+                    key={id}
+                    repoId={repo.id}
+                    repoName={repo.name}
+                    ahref={repo.html_url}
+                    repoLang={repo.language}
+                  />
+                );
+              })
+            : null}
+        </CardContent>
+      </CardAndInput>
     </Container>
   );
 };

@@ -10,6 +10,7 @@ const CardSection = styled.div`
   border: 1px solid #353d40;
   grid-gap: 15px;
   background: #353d40;
+  text-align: center;
   a {
     color: #f2b138;
   }
@@ -21,7 +22,9 @@ const CardSection = styled.div`
 const Card = ({ repoName, ahref, repoLang }) => {
   return (
     <CardSection>
-      <a href={ahref}>{repoName}</a>
+      <a href={ahref} target="_blank">
+        {repoName}
+      </a>
       <p>Language : {repoLang ? repoLang : "Javascript"}</p>
     </CardSection>
   );
