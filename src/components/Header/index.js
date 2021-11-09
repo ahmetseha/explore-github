@@ -7,7 +7,7 @@ const Container = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 0 100px;
-  height: 90px;
+  height: 100px;
   background-color: #353d40;
 `;
 const Head = styled.h1`

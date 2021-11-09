@@ -2,13 +2,14 @@ import styled from "styled-components";
 import { useState } from "react";
 
 import Card from "./Card";
-import getUserRepos from "../../api";
+import UserInfo from "./UserInfo";
+import getUsers from "../../api";
 
 const Container = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
+  margin: 30px;
+  grid-gap: 30px;
 `;
 const FormSection = styled.form`
   display: flex;
@@ -22,6 +23,7 @@ const FormSection = styled.form`
     border-radius: 8px;
     padding: 10px 10px 10px 25px;
     width: 40%;
+    margin-bottom: 20px;
     font-size: 18px;
     font-weight: 500;
     letter-spacing: 1px;
@@ -33,8 +35,7 @@ const FormSection = styled.form`
 `;
 const CardContent = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   grid-gap: 40px;
 `;
@@ -45,35 +46,33 @@ const CardContainer = () => {
 
   const getUserRepo = (e) => {
     e.preventDefault();
-    getUserRepos
-      .get(`${name}/repos?sort=created&direction=desc&per_page=300`)
-      .then((res) => {
-        console.log(res.data);
-        setRepos(res.data);
-      });
+    getUsers.get(`${name}/repos?per_page=1000`).then((res) => {
+      // console.log(res.data);
+      setRepos(res.data);
+    });
   };
+
   return (
     <Container>
       <FormSection onSubmit={getUserRepo}>
         <input value={name} onChange={(e) => setName(e.target.value)} />
       </FormSection>
-      <div>
-        <CardContent>
-          {repos
-            ? repos.map((repo, id) => {
-                return (
-                  <Card
-                    key={id}
-                    repoId={repo.id}
-                    repoName={repo.name}
-                    ahref={repo.html_url}
-                    repoLang={repo.language}
-                  />
-                );
-              })
-            : null}
-        </CardContent>
-      </div>
+      <UserInfo name={name} setName={setName} getUser={getUserRepo} />
+      <CardContent>
+        {repos
+          ? repos.map((repo, id) => {
+              return (
+                <Card
+                  key={id}
+                  repoId={repo.id}
+                  repoName={repo.name}
+                  ahref={repo.html_url}
+                  repoLang={repo.language}
+                />
+              );
+            })
+          : null}
+      </CardContent>
     </Container>
   );
 };
