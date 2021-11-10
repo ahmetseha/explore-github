@@ -4,6 +4,8 @@ const UserContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  grid-gap: 30px;
+  height: 100%;
 `;
 const Image = styled.div`
   display: flex;
@@ -16,10 +18,18 @@ const Image = styled.div`
   }
 `;
 const Bio = styled.p`
-  font-size: 12px;
+  text-align: center;
+  font-size: 15px;
 `;
 const FollowInfo = styled.span`
+  display: flex;
+  justify-content: center;
   font-size: 12px;
+  grid-gap: 5px;
+  color: #353d40;
+  span {
+    font-size: 15px;
+  }
 `;
 
 const UserInfo = (props) => {
@@ -32,7 +42,9 @@ const UserInfo = (props) => {
       </Image>
       <Bio>{userInfo.bio}</Bio>
       <FollowInfo>
-        Followers : {userInfo.followers} <br /> Following : {userInfo.following}
+        <span>Followers : {userInfo.followers}</span>
+        <br />
+        <span>Following : {userInfo.following}</span>
       </FollowInfo>
     </UserContainer>
   );

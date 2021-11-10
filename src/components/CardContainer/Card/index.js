@@ -22,7 +22,7 @@ const CardSection = styled.div`
 const Card = ({ repoName, ahref, repoLang }) => {
   return (
     <CardSection>
-      <a href={ahref} target="_blank">
+      <a rel="noopener noreferrer" href={ahref} target="_blank">
         {repoName}
       </a>
       <p>Language : {repoLang ? repoLang : "Javascript"}</p>

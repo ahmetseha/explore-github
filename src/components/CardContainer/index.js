@@ -12,19 +12,19 @@ const UserInfoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #d9d9d9;
+  background-color: #a1a5a6;
   width: 40%;
+  position: sticky;
 `;
 const CardAndInput = styled.div`
   width: 100%;
   padding: 20px;
-  overflow: hidden;
 `;
 const FormSection = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 30px;
+  margin: 30px 0 10px 0;
   input {
     border: 1px solid #353d40;
     border-radius: 8px;
@@ -46,6 +46,16 @@ const CardContent = styled.div`
   flex-wrap: wrap;
   grid-gap: 40px;
   height: 100vh;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #f2b138;
+  }
 `;
 
 const CardContainer = () => {

@@ -7,7 +7,6 @@ import { Switch, Route, HashRouter as Router } from "react-router-dom";
 import { Provider as LanguageProvider } from "./context/language";
 import localization from "./localization";
 import Header from "./components/Header";
-import Home from "./pages/Home";
 import Explore from "./pages/Explore";
 import Trends from "./pages/Trends";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -31,9 +30,6 @@ const App = () => {
           <Header locale={locale} setLocale={setLocale} />
           <Switch>
             <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/explore">
               <Explore />
             </Route>
             <Route path="/trends">

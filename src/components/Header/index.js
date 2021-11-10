@@ -9,6 +9,7 @@ const Container = styled.header`
   padding: 0 100px;
   height: 100px;
   background-color: #353d40;
+  width: 100%;
 `;
 const Head = styled.h1`
   letter-spacing: 3px;
@@ -57,9 +58,6 @@ const Header = (props) => {
       </NavLink>
       <Nav>
         <NavLink to="/">
-          <List>Home</List>
-        </NavLink>
-        <NavLink to="/Explore">
           <List>Explore</List>
         </NavLink>
         <NavLink to="/Trends">
