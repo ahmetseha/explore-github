@@ -67,7 +67,6 @@ const CardContainer = () => {
   const getUserInfo = () => {
     getUsers.get(`${name}`).then((res) => {
       setUserInfo(res.data);
-      console.log(userInfo);
     });
   };
 

@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-
+import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 
 const Container = styled.header`
@@ -30,9 +30,6 @@ const List = styled.li`
   cursor: pointer;
 `;
 const Lang = styled.select`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
   font-size: 15px;
   color: #f2b138;
@@ -58,10 +55,9 @@ const Header = (props) => {
       </NavLink>
       <Nav>
         <NavLink to="/">
-          <List>Explore</List>
-        </NavLink>
-        <NavLink to="/Trends">
-          <List>Trends</List>
+          <List>
+            <FormattedMessage id="explore">Explore</FormattedMessage>
+          </List>
         </NavLink>
         <Lang
           value={props.locale}

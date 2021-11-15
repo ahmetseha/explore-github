@@ -8,7 +8,6 @@ import { Provider as LanguageProvider } from "./context/language";
 import localization from "./localization";
 import Header from "./components/Header";
 import Explore from "./pages/Explore";
-import Trends from "./pages/Trends";
 import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
@@ -31,9 +30,6 @@ const App = () => {
           <Switch>
             <Route exact path="/">
               <Explore />
-            </Route>
-            <Route path="/trends">
-              <Trends />
             </Route>
             <Route path="*" exact>
               <NotFoundPage />
